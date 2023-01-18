@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: wordpress-service
+  annotations:
+    service.beta.kubernetes.io/oci-load-balancer-shape: "100Mbps"
   labels:
     app: wordpress
 spec:
