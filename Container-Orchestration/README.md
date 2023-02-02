@@ -283,6 +283,58 @@ http://138.xx.xx.xx/
 
 ![WordPress Setup](./images/wordpress.png)
 
+## Scale Up & Down
+
+WordPress Podを10個にして、スケールアップします。
+
+```
+kubectl scale deployment wordpress --replicas 10
+```
+```
+deployment.apps/wordpress scaled
+```
+
+```
+kubectl get pods
+```
+```
+NAME                          READY   STATUS    RESTARTS   AGE
+mysql-c468c5548-bh6t5         1/1     Running   0          6m41s
+nfs-server-754d98f49b-zmfld   1/1     Running   0          10m
+wordpress-74d8c99c7f-6dhzg    1/1     Running   0          104s
+wordpress-74d8c99c7f-kg96k    1/1     Running   0          104s
+wordpress-74d8c99c7f-m2dg7    1/1     Running   0          104s
+wordpress-74d8c99c7f-mjrsm    1/1     Running   0          6m19s
+wordpress-74d8c99c7f-nzxkd    1/1     Running   0          104s
+wordpress-74d8c99c7f-pbr57    1/1     Running   0          104s
+wordpress-74d8c99c7f-pfrfz    1/1     Running   0          104s
+wordpress-74d8c99c7f-qqtdc    1/1     Running   0          104s
+wordpress-74d8c99c7f-rknbm    1/1     Running   0          105s
+wordpress-74d8c99c7f-svhpj    1/1     Running   0          104s
+```
+
+WordPress Podを1個にして、スケールダウンします。
+
+```
+kubectl scale deployment wordpress --replicas 1
+```
+```
+deployment.apps/wordpress scaled
+```
+
+```
+kubectl get pods
+```
+```
+NAME                          READY   STATUS    RESTARTS   AGE
+mysql-c468c5548-bh6t5         1/1     Running   0          6m41s
+nfs-server-754d98f49b-zmfld   1/1     Running   0          10m
+wordpress-74d8c99c7f-mjrsm    1/1     Running   0          6m19s
+```
+
+コマンドによるPodのスケールアップとスケールダウンを行いましたが、
+マニフェストファイルに定義して適用することでも可能です。
+
 ## Delete
 
 WordPressとMySQLのDeploymentとServiceを削除します。
